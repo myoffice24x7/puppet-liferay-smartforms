@@ -11,7 +11,7 @@ class myoffice::smartforms::client_liferay::get {
   }
 
   exec { 'wget-liferay':
-    command => "/usr/bin/wget --output-document=/home/${web_user}/liferay.zip ${lr_dl}", 
+    command => "/usr/bin/wget --output-document=/home/${web_user}/liferay.zip \"${lr_dl}\"", 
     creates => "/home/${web_user}/liferay.zip",
     group   => "${web_user}",
     user    => "${web_user}",
@@ -41,7 +41,8 @@ class myoffice::smartforms::client_liferay::get {
     group  => "${web_user}",
   }
 
-  Exec['unzip-liferay'] -> File["/home/${web_user}/liferay-portal"] -> File["/home/${web_user}/liferay-portal/tomcat"]
+  Exec['wget-liferay'] -> Exec['unzip-liferay'] -> 
+  File["/home/${web_user}/liferay-portal"] -> File["/home/${web_user}/liferay-portal/tomcat"]
 }
 
 class myoffice::smartforms::client_liferay::configure {
