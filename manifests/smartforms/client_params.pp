@@ -12,5 +12,6 @@ class myoffice::smartforms::client_params {
 
   $lr_dl    = 'http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/6.1.1%20GA2/liferay-portal-tomcat-6.1.1-ce-ga2-20120731132656558.zip?r=\&ts=1357953553\&use_mirror=waix'
   $lr_root  = '/home/liferay/liferay-portal-6.1.1-ce-ga2'
+  $tc_root  = "${lr_root}/tomcat-7.0.27"
 
 }

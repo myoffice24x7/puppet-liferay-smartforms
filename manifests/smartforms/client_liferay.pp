@@ -34,11 +34,18 @@ class myoffice::smartforms::client_liferay::get {
     group  => "${web_user}",
   }
 
-  Exec['unzip-liferay'] -> File["/home/${web_user}/liferay-portal"]
+  file { "/home/${web_user}/liferay-portal/tomcat":
+    ensure => 'link',
+    target => "${tc_root}",
+    owner  => "${web_user}",
+    group  => "${web_user}",
+  }
+
+  Exec['unzip-liferay'] -> File["/home/${web_user}/liferay-portal"] -> File["/home/${web_user}/liferay-portal/tomcat"]
 }
 
 class myoffice::smartforms::client_liferay::configure {
-  file { "/home/${web_user}/liferay-portal/tomcat-7.0.27/webapps/ROOT/WEB-INF/classes/portal-ext.properties":
+  file { "/home/${web_user}/liferay-portal/tomcat/webapps/ROOT/WEB-INF/classes/portal-ext.properties":
     owner   => "${web_user}",
     group   => "${web_user}",
     content => template('myoffice/portal-ext.erb')

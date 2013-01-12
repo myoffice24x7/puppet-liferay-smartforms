@@ -15,8 +15,8 @@ class myoffice::smartforms::client(
 
   file { '/etc/profile.d/java.sh':
     ensure  => present,
-    content => "export JAVA_HOME=/opt/java/jdk${java_ver};export PATH=\$PATH:\$JAVA_HOME/bin/;",
-    mode    => 644,
+    content => "export JAVA_HOME=/opt/java/jdk${java_ver} && export PATH=\$PATH:\$JAVA_HOME/bin/",
+    mode    => 'a+x',
     owner   => 'root',
     group   => 'root'
   }
