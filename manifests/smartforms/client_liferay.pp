@@ -11,7 +11,7 @@ class myoffice::smartforms::client_liferay::get {
   }
 
   exec { 'wget-liferay':
-    command => '/usr/bin/wget --output-document=/home/liferay/liferay.zip http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/6.1.1%20GA2/liferay-portal-tomcat-6.1.1-ce-ga2-20120731132656558.zip?r=\&ts=1357953553\&use_mirror=waix',
+    command => "/usr/bin/wget --output-document=/home/liferay/liferay.zip ${lr_dl}", 
     creates => '/home/liferay/liferay.zip',
     group   => 'liferay',
     user    => 'liferay',
@@ -19,15 +19,20 @@ class myoffice::smartforms::client_liferay::get {
   }
 
   exec { 'unzip-liferay':
-    command => '/usr/bin/unzip /home/liferay/liferay.zip',
+    command => '/usr/bin/unzip -o /home/liferay/liferay.zip',
     user    => 'liferay',
     group   => 'liferay',
     cwd     => '/home/liferay/',
-    creates => '/home/liferay/liferay-portal-6.1.1-ce-ga2',
+    creates => "${lr_root}",
     require => Package['unzip'],
   }
 }
 
-class myoffice::smartforms::client_liferay {
+class myoffice::smartforms::client_liferay(
+  $lr_dl   = $myoffice::smartforms::client_params::lr_dl,
+  $lr_root = $myoffice::smartforms::client_params::lr_root,
+) inherits myoffice::smartforms::client_params {
+
   class { 'myoffice::smartforms::client_liferay::get': }
+
 }

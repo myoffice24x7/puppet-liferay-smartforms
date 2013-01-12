@@ -3,6 +3,7 @@
 class myoffice::smartforms::client(
   $java_ver = $myoffice::smartforms::client_params::java_ver
 ) inherits myoffice::smartforms::client_params {
+ 
   class { 'java':
     java_version => $java_ver
   }
