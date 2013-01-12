@@ -26,6 +26,15 @@ class myoffice::smartforms::client_liferay::get {
     creates => "${lr_root}",
     require => Package['unzip'],
   }
+
+  file { '/home/liferay/liferay-portal':
+    ensure => 'link',
+    target => "${lr_root}",
+    owner  => 'liferay',
+    group  => 'liferay',
+  }
+
+  Exec['unzip-liferay'] -> File['/home/liferay/liferay-portal']
 }
 
 class myoffice::smartforms::client_liferay(
