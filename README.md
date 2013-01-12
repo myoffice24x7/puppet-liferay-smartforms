@@ -18,3 +18,8 @@ A variety of parameters are available in `client_params.pp`, including:
 * Java version
 * Liferay release
 * SmartForms licence selection
+
+Dependencies
+------------
+* My fork of puppet-java [(link)](https://github.com/alexzorin/puppet-java)
+* puppet-percona [(link)](https://github.com/arioch/puppet-percona)
