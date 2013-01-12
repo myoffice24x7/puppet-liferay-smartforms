@@ -15,6 +15,7 @@ class myoffice::smartforms::client_liferay::get {
     creates => "/home/${web_user}/liferay.zip",
     group   => "${web_user}",
     user    => "${web_user}",
+    timeout => '0',
     require => Package['wget'],
   }
 
