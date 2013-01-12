@@ -12,6 +12,7 @@ class myoffice::smartforms::client(
   class { 'myoffice::smartforms::client_db': }
   class { 'myoffice::smartforms::client_user': }
   class { 'myoffice::smartforms::client_liferay': }
+  class { 'myoffice::smartforms::client_portlet': }
 
   file { '/etc/profile.d/java.sh':
     ensure  => present,
@@ -22,4 +23,5 @@ class myoffice::smartforms::client(
   }
 
   Class['apt'] -> Class['myoffice::smartforms::client_db']
+  Class['myoffice::smartforms::client_liferay'] -> Class['myoffice::smartforms::client_portlet']
 }
